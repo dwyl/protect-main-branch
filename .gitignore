@@ -4,3 +4,7 @@
 erl_crash.dump
 *.ez
 *.beam
+.env
+
+# Executable script
+/protect
