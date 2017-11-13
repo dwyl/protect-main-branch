@@ -1,13 +1,17 @@
 defmodule Protect do
   @moduledoc """
-    Functions that turn into a command line script that takes an organisation
-    name and a json file of protection rules, and applies those rules to the
+    Functions that turn into a command line script that takes an owner,
+    and a json file of protection rules, and applies those rules to the
     master branch of all the organisation's repos
   """
   require Poison
   alias Protect.Github
 
 
+  @doc """
+    The function that is called when the command line script is run.
+    The arguments are passed in from the command line options.
+  """
   def main(args) do
     options = args |> parse_args |> validate_options
 
@@ -24,7 +28,10 @@ defmodule Protect do
   end
 
 
-  defp parse_args(args) do
+  @doc """
+    Parses command line arguments into a keyword list.
+  """
+  def parse_args(args) do
     {options, _, _} = OptionParser.parse(args,
       switches: [org: :string, rules: :string, user: :string]
     )
@@ -32,7 +39,10 @@ defmodule Protect do
   end
 
 
-  defp validate_options(options) do
+  @doc """
+    Checks if the command line options are valid, and throws an error if not.
+  """
+  def validate_options(options) do
     if options[:org] && options[:user] do
       raise "You can only protect repos for one organisation or user at a time"
     end
@@ -49,6 +59,10 @@ defmodule Protect do
   end
 
 
+  @doc """
+    Gets a list of Github repos for an owner that can be either a user or an
+    organisation.
+  """
   def get_repos(options, page \\ 1, repos \\ []) do
     new_repos =
       options
@@ -65,6 +79,10 @@ defmodule Protect do
   end
 
 
+  @doc """
+    Determines the correct url to ise in the get_repos function, depending on
+    whether the repo owner is a user or an organisation.
+  """
   def get_repos_url(options, page \\ 1) do
       cond do
         options[:org] ->
@@ -75,6 +93,9 @@ defmodule Protect do
   end
 
 
+  @doc """
+    Applies a set of rules to the master branch of the repo specified.
+  """
   def protect_repo(options, repo, rules) do
     owner = options[:org] || options[:user]
 
@@ -83,6 +104,9 @@ defmodule Protect do
   end
 
 
+  @doc """
+    Reports how many repos were succesfully or unsuccessfully protected.
+  """
   def report(results) do
     success = Enum.count(results, fn res -> res == 200 end)
     fail = Enum.count(results, fn res -> res != 200 end)

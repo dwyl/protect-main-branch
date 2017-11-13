@@ -1,4 +1,7 @@
 defmodule Protect.Github do
+  @moduledoc """
+    Helper functions to interact with the Github API.
+  """
   require HTTPoison
 
   @auth_token System.get_env "GITHUB_ACCESS_TOKEN"
