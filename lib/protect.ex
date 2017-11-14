@@ -55,6 +55,10 @@ defmodule Protect do
       raise "You must provide a json file of protection rules"
     end
 
+    if !Regex.match?(~r/.+\.json$/, options[:rules]) do
+      raise "--rules must be a json file"
+    end
+
     options
   end
 
@@ -80,7 +84,7 @@ defmodule Protect do
 
 
   @doc """
-    Determines the correct url to ise in the get_repos function, depending on
+    Determines the correct url to use in the get_repos function, depending on
     whether the repo owner is a user or an organisation.
   """
   def get_repos_url(options, page \\ 1) do
