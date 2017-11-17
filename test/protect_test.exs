@@ -51,12 +51,16 @@ defmodule ProtectTest do
 
   describe "report/1" do
     # Tuples representing: {list of status codes, successes, failures}
+    @status_200 %{status_code: 200, repo_name: "test"}
+    @status_404 %{status_code: 404, repo_name: "test"}
+    @status_500 %{status_code: 500, repo_name: "test"}
+
     @status_codes [
-      {[200, 200, 200, 200], 4, 0},
-      {[404, 404, 200, 404], 1, 3},
-      {[500, 500], 0, 2},
-      {[500, 200, 500, 200], 2, 2},
-      {[404], 0, 1}
+      {[@status_200, @status_200, @status_200, @status_200], 4, 0},
+      {[@status_404, @status_404, @status_200, @status_404], 1, 3},
+      {[@status_500, @status_500], 0, 2},
+      {[@status_500, @status_200, @status_500, @status_200], 2, 2},
+      {[@status_404], 0, 1}
     ]
 
     test "report" do

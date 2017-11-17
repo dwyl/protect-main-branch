@@ -22,7 +22,7 @@ defmodule Protect do
     |> Enum.map(fn repo ->
       options
       |> protect_repo(repo, rules)
-      |> Map.get(:status_code)
+      |> Map.put(:repo_name, repo)
     end)
     |> report
   end
@@ -118,11 +118,14 @@ defmodule Protect do
     Reports how many repos were succesfully or unsuccessfully protected.
   """
   def report(results) do
-    success = Enum.count(results, fn res -> res == 200 end)
-    fail = Enum.count(results, fn res -> res != 200 end)
+    success_count = Enum.count(results, fn res -> res.status_code == 200 end)
+    fail_count = Enum.count(results, fn res -> res.status_code != 200 end)
+
+    Enum.each(results, &(IO.puts "#{&1.repo_name}: #{&1.status_code}"))
+
     IO.puts """
-      #{success} branches succesfully protected
-      #{fail} branches errored
+      #{success_count} branches succesfully protected
+      #{fail_count} branches errored
     """
   end
 end
