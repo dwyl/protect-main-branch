@@ -59,6 +59,12 @@ defmodule Protect do
       raise "--rules must be a json file"
     end
 
+    Enum.each([options[:org], options[:user]], &(
+      if &1 && Regex.match?(~r/[^a-zA-Z0-9\-]/, &1) do
+        raise "user/org must be a valid Github username"
+      end
+    ))
+
     options
   end
 

@@ -4,21 +4,22 @@ defmodule ProtectTest do
   alias Protect
   import ExUnit.CaptureIO
 
+  @invalid_options [
+    [],
+    [org: "dwyl", user: "danwhy"],
+    [org: "dwyl"],
+    [org: "danwhy"],
+    [rules: "./fixtures/test.json"],
+    [user: "danwhy", rules: "./test.txt"],
+    [user: "???", rules: "./fixtures/test.json"]
+  ]
+
+  @valid_options [
+    [user: "danwhy", rules: "./fixtures/test.json"],
+    [org: "dwyl", rules: "./fixtures/test.json"]
+  ]
+
   describe "validate_options/1" do
-    @invalid_options [
-      [],
-      [org: "dwyl", user: "danwhy"],
-      [org: "dwyl"],
-      [org: "danwhy"],
-      [rules: "./test.json"],
-      [user: "danwhy", rules: "./test.txt"]
-    ]
-
-    @valid_options [
-      [user: "danwhy", rules: "./test.json"],
-      [org: "dwyl", rules: "./test.json"]
-    ]
-
     test "invalid options" do
       Enum.each(
         @invalid_options,
@@ -67,6 +68,50 @@ defmodule ProtectTest do
             #{fail} branches errored
           """
         end
+      )
+    end
+  end
+
+  describe "get_repos/3" do
+    test "get repos user" do
+      assert Protect.get_repos([user: "danwhy"]) == ["test"]
+    end
+
+    test "get repos org" do
+      assert Protect.get_repos([org: "dwyl"]) == ["test"]
+    end
+  end
+
+  describe "protect_repo/3" do
+    test "protect repo" do
+      assert Protect.protect_repo(
+        [user: "danwhy"],
+        "/repos/danwhy/test/branches/master/protection",
+        %{test: "body"}
+      ) == %{status_code: 200}
+    end
+  end
+
+  describe "main/1" do
+    test "main success" do
+      assert Protect.main(
+        ["--user", "danwhy", "--rules", "./test/fixtures/test.json"]
+      ) == :ok
+
+      assert capture_io(
+        fn ->
+          ["--user", "danwhy", "--rules", "./test/fixtures/test.json"]
+          |> Protect.main
+        end) =~ """
+          1 branches succesfully protected
+          0 branches errored
+        """
+    end
+
+    test "main bad arguments" do
+      Enum.each(
+        @invalid_options,
+        &(assert_raise(RuntimeError, fn -> Protect.main(&1) end))
       )
     end
   end

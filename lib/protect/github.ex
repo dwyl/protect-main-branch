@@ -2,8 +2,7 @@ defmodule Protect.Github do
   @moduledoc """
     Helper functions to interact with the Github API.
   """
-  require HTTPoison
-
+  @httpoison Application.get_env :protect, :httpoison
   @auth_token System.get_env "GITHUB_ACCESS_TOKEN"
   @root_url "https://api.github.com"
 
@@ -13,6 +12,6 @@ defmodule Protect.Github do
   defp request!(method, url, body \\ "") do
     headers = [{"Authorization", "token #{@auth_token}"}]
 
-    method |> HTTPoison.request!(@root_url <> url, body, headers)
+    method |> @httpoison.request!(@root_url <> url, body, headers)
   end
 end
