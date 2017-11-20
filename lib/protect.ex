@@ -118,10 +118,11 @@ defmodule Protect do
     Reports how many repos were succesfully or unsuccessfully protected.
   """
   def report(results) do
+    fail = Enum.filter(results, fn res -> res.status_code != 200 end)
+    fail_count = Enum.count(fail)
     success_count = Enum.count(results, fn res -> res.status_code == 200 end)
-    fail_count = Enum.count(results, fn res -> res.status_code != 200 end)
 
-    Enum.each(results, &(IO.puts "#{&1.repo_name}: #{&1.status_code}"))
+    Enum.each(fail, &(IO.puts "Error #{&1.status_code}: #{&1.repo_name}"))
 
     IO.puts """
       #{success_count} branches succesfully protected
