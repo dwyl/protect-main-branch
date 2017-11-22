@@ -1,6 +1,5 @@
 defmodule ProtectTest.Github do
   use ExUnit.Case
-  alias Protect
   alias Protect.Github
 
   describe "get!/1" do

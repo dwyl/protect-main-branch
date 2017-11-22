@@ -1,7 +1,5 @@
 defmodule ProtectTest do
   use ExUnit.Case
-  doctest Protect
-  alias Protect
   import ExUnit.CaptureIO
 
   @invalid_options [
