@@ -7,7 +7,6 @@ defmodule Protect do
   require Poison
   alias Protect.Github
 
-
   @doc """
     The function that is called when the command line script is run.
     The arguments are passed in from the command line options.
@@ -27,7 +26,6 @@ defmodule Protect do
     |> report
   end
 
-
   @doc """
     Parses command line arguments into a keyword list.
   """
@@ -37,7 +35,6 @@ defmodule Protect do
     )
     options
   end
-
 
   @doc """
     Checks if the command line options are valid, and throws an error if not.
@@ -68,7 +65,6 @@ defmodule Protect do
     options
   end
 
-
   @doc """
     Gets a list of Github repos for an owner that can be either a user or an
     organisation.
@@ -88,7 +84,6 @@ defmodule Protect do
     end
   end
 
-
   @doc """
     Determines the correct url to use in the get_repos function, depending on
     whether the repo owner is a user or an organisation.
@@ -102,7 +97,6 @@ defmodule Protect do
       end
   end
 
-
   @doc """
     Applies a set of rules to the master branch of the repo specified.
   """
@@ -112,7 +106,6 @@ defmodule Protect do
     "/repos/#{owner}/#{repo}/branches/master/protection"
     |> Github.put!(rules)
   end
-
 
   @doc """
     Reports how many repos were succesfully or unsuccessfully protected.

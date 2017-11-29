@@ -23,7 +23,8 @@ defmodule Protect.Mixfile do
   defp deps do
     [
       {:poison, "~> 3.1"},
-      {:httpoison, "~> 0.13.0"}
+      {:httpoison, "~> 0.13.0"},
+      {:credo, "~> 0.8", only: [:dev, :test], runtime: false}
     ]
   end
 end
