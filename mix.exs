@@ -9,6 +9,13 @@ defmodule Protect.Mixfile do
       start_permanent: Mix.env == :prod,
       deps: deps(),
       escript: [main_module: Protect],
+      test_coverage: [tool: ExCoveralls],
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ]
     ]
   end
 
@@ -25,7 +32,8 @@ defmodule Protect.Mixfile do
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.6.2"},
       {:credo, "~> 1.3.2", only: [:dev, :test], runtime: false},
-      {:pre_commit, "~> 0.3.4", only: :dev}
+      {:pre_commit, "~> 0.3.4", only: :dev},
+      {:excoveralls, "~> 0.12.3", only: [:dev, :test]}
     ]
   end
 end
