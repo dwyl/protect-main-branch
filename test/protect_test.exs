@@ -1,6 +1,7 @@
 defmodule ProtectTest do
   use ExUnit.Case
   import ExUnit.CaptureIO
+  alias Protect.Mock.HTTPoison, as: Mock
 
   @invalid_options [
     [],
@@ -81,12 +82,13 @@ defmodule ProtectTest do
 
     test "get repos org" do
       url = "https://api.github.com/orgs/dwyl/repos?per_page=100&page=1"
-      repos = Protect.Mock.HTTPoison.request!("get", url, "_body", "_headers")
+      json = Mock.request!("get", url, "_body", "_headers")
+      repos = json
       |> Map.get(:body, "{}")
       |> Poison.decode!
       |> Enum.map(&Map.fetch!(&1, "name"))
 
-      assert Protect.get_repos([org: "dwyl"]) == repos ++["test"]
+      assert Protect.get_repos([org: "dwyl"]) == repos ++ ["test"]
     end
   end
 
