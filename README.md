@@ -8,7 +8,7 @@
 
 </div>
 
-## _Why?_
+## _Why?_
 
 If you have an organisation
 with a lot of collaborators
@@ -114,7 +114,8 @@ Options:
 
 Either user _or_ org should be passed as an option, never both.
 
-Example:
+#### Example:
+
 ```
 ./protect --org dwyl --rules rules.json
 ```
