@@ -8,16 +8,16 @@
 
 </div>
 
-# _Why?_
+## _Why?_
 
 If you have an organisation
 with a lot of collaborators
 who all have write access to your repositories,
 it's a _really_ good idea
-to protect them from accidental deletion.
+to protect `master` from accidental deletion.
 
 
-# _What?_
+## _What?_
 
 If anyone in your organisation can
 `git push master --force`
@@ -38,7 +38,7 @@ force-pushing to `master` is widely known to be destructive
 and potentially catastrophic.
 
 
-# _Who?_
+## _Who?_
 
 This is relevant to organisations/people
 that have a _lot_ of GitHub repositories
@@ -46,9 +46,9 @@ and want to protect them from accidental
 (_or malicious_) destruction.
 
 
-# _How_?
+## _How_?
 
-## Requirements
+### Requirements
 
 [Elixir 1.5](http://elixir-lang.github.io/install.html)
 
@@ -82,7 +82,7 @@ file to avoid losing the variable when the terminal session ends.
 
 
 
-## Usage
+### Usage
 
 You'll first need to clone this repo:  
 
