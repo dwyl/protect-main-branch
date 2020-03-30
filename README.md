@@ -4,9 +4,8 @@
 
 [![Build Status](https://img.shields.io/travis/dwyl/protect-master-branch/master.svg?style=flat-square)](https://travis-ci.org/dwyl/protect-master-branch)
 [![codecov.io](https://img.shields.io/codecov/c/github/dwyl/protect-master-branch/master.svg?style=flat-square)](http://codecov.io/github/dwyl/protect-master-branch?branch=master)
-<!--
 [![HitCount](http://hits.dwyl.com/dwyl/protect-master-branch.svg)](http://hits.dwyl.com/dwyl/protect-master-branch)
--->
+
 </div>
 
 # _Why?_
@@ -83,7 +82,7 @@ file to avoid losing the variable when the terminal session ends.
 
 
 
-## Use
+## Usage
 
 You'll first need to clone this repo:  
 
