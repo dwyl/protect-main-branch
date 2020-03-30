@@ -115,4 +115,29 @@ Options:
 
 Either user _or_ org should be passed as an option, never both.
 
+Example:
+```
+./protect --org dwyl --rules rules.json
+```
+
+You should expect to see output similar to the following:
+
+```
+"/repos/dwyl/learn-vim/branches/master/protection"
+"/repos/dwyl/app/branches/master/protection"
+"/repos/dwyl/learn-heroku/branches/master/protection"
+"/repos/dwyl/learn-amazon-web-services/branches/master/protection"
+...
+"/repos/dwyl/auth-mvp/branches/master/protection"
+"/repos/dwyl/flutter-counter-example/branches/master/protection"
+Error 404: why
+Error 404: learn-WebAssembly
+  318 branches succesfully protected
+  2 branches errored
+```
+
+Repos will appear in the output in age order.
+(_oldest repos first_)
+
+
  See [Github API docs](https://developer.github.com/v3/repos/branches/#update-branch-protection) for full details of the protection rules available, and [our rules file](https://github.com/dwyl/protect-master-branch/blob/master/rules.json) for an example.
