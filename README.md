@@ -1,9 +1,42 @@
+<div align="center">
+
 # Protect Master Branch
+
+[![Build Status](https://img.shields.io/travis/dwyl/protect-master-branch/master.svg?style=flat-square)](https://travis-ci.org/dwyl/protect-master-branch)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/protect-master-branch/master.svg?style=flat-square)](http://codecov.io/github/dwyl/protect-master-branch?branch=master)
+<!--
+[![HitCount](http://hits.dwyl.com/dwyl/protect-master-branch.svg)](http://hits.dwyl.com/dwyl/protect-master-branch)
+-->
+</div>
 
 # _Why?_
 
+If you have an organisation
+with a lot of collaborators
+who all have write access to your repositories,
+it's a _really_ good idea
+to protect them from accidental deletion.
+
 
 # _What?_
+
+If anyone in your organisation can
+`git push master --force`
+and _destroy_ all history of the repository,
+someone could either accidentally or maliciously
+burn down your house!
+
+<div align="center">
+    <a href="https://www.google.com/search?q=git+push+master+--force&source=lnms&tbm=isch">
+        <img src="https://user-images.githubusercontent.com/194400/66544431-049f0a00-eb30-11e9-8ccc-696d2016a05b.png">
+    </a>
+</div>
+<br />
+
+> **Note**: we didn't create this
+[meme](https://www.google.com/search?q=git+push+master+--force&tbm=isch),
+force-pushing to `master` is widely known to be destructive
+and potentially catastrophic.
 
 
 # _Who?_
