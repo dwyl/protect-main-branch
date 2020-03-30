@@ -12,6 +12,6 @@ defmodule Protect.Github do
   defp request!(method, url, body \\ "") do
     headers = [{"Authorization", "token #{@auth_token}"}]
 
-    method |> @httpoison.request!(@root_url <> url, body, headers)
+    @httpoison.request!(method, @root_url <> url, body, headers)
   end
 end
