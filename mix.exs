@@ -22,10 +22,10 @@ defmodule Protect.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 3.1"},
-      {:httpoison, "~> 0.13.0"},
-      {:credo, "~> 0.8", only: [:dev, :test], runtime: false},
-      {:pre_commit, "~> 0.2.4", only: :dev}
+      {:poison, "~> 4.0.1"},
+      {:httpoison, "~> 1.6.2"},
+      {:credo, "~> 1.3.2", only: [:dev, :test], runtime: false},
+      {:pre_commit, "~> 0.3.4", only: :dev}
     ]
   end
 end
