@@ -14,7 +14,7 @@ defmodule ProtectTest do
   ]
 
   @valid_options [
-    [user: "nelsonic", rules: "./fixtures/test.json"],
+    [user: "danwhy", rules: "./fixtures/test.json"],
     [org: "dwyl", rules: "./fixtures/test.json"]
   ]
 
