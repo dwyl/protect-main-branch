@@ -104,6 +104,7 @@ defmodule Protect do
     owner = options[:org] || options[:user]
 
     "/repos/#{owner}/#{repo}/branches/master/protection"
+    |> IO.inspect()
     |> Github.put!(rules)
   end
 
