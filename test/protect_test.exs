@@ -96,7 +96,7 @@ defmodule ProtectTest do
     test "protect repo" do
       assert Protect.protect_repo(
         [user: "danwhy"],
-        "/repos/danwhy/test/branches/master/protection",
+        "/repos/danwhy/test/branches/main/protection",
         %{test: "body"}
       ) == %{status_code: 200}
     end

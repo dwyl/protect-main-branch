@@ -2,7 +2,7 @@ defmodule Protect do
   @moduledoc """
     Functions that turn into a command line script that takes an owner,
     and a json file of protection rules, and applies those rules to the
-    master branch of all the organisation's repos
+    main branch of all the organization's repos
   """
   require Poison
   alias Protect.Github
@@ -67,7 +67,7 @@ defmodule Protect do
 
   @doc """
     Gets a list of Github repos for an owner that can be either a user or an
-    organisation.
+    organization.
   """
   def get_repos(options, page \\ 1, repos \\ []) do
     new_repos =
@@ -86,7 +86,7 @@ defmodule Protect do
 
   @doc """
     Determines the correct url to use in the get_repos function, depending on
-    whether the repo owner is a user or an organisation.
+    whether the repo owner is a user or an organization.
   """
   def get_repos_url(options, page \\ 1) do
       cond do
@@ -98,18 +98,18 @@ defmodule Protect do
   end
 
   @doc """
-    Applies a set of rules to the master branch of the repo specified.
+    Applies a set of rules to the main branch of the repo specified.
   """
   def protect_repo(options, repo, rules) do
     owner = options[:org] || options[:user]
 
-    "/repos/#{owner}/#{repo}/branches/master/protection"
+    "/repos/#{owner}/#{repo}/branches/main/protection"
     |> IO.inspect()
     |> Github.put!(rules)
   end
 
   @doc """
-    Reports how many repos were succesfully or unsuccessfully protected.
+    Reports how many repos were successfully or unsuccessfully protected.
   """
   def report(results) do
     fail = Enum.filter(results, fn res -> res.status_code != 200 end)

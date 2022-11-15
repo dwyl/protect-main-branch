@@ -10,19 +10,21 @@
 
 ## _Why?_
 
-If you have an organisation
-with a lot of collaborators
-who all have write access to your repositories,
+If you have an company/org
+with lots of collaborators
+who all have **`write` access** to your repositories,
 it's a _really_ good idea
-to protect `master` from accidental deletion.
+to ***protect*** you **`main` branch** 
+from accidental overwrite or deletion.
 
 
 ## _What?_
 
 If anyone in your organisation can
-`git push master --force`
+`git push main --force`
 and _destroy_ all history of the repository,
-someone could either accidentally or maliciously
+someone could either 
+_accidentally_ or _maliciously_
 burn down your house!
 
 <div align="center">
@@ -34,7 +36,7 @@ burn down your house!
 
 > **Note**: we didn't create this
 [meme](https://www.google.com/search?q=git+push+master+--force&tbm=isch),
-force-pushing to `master` is widely known to be destructive
+force-pushing to `main` / `master` is widely known to be destructive
 and potentially catastrophic.
 
 
@@ -50,11 +52,13 @@ and want to protect them from accidental
 
 ### Requirements
 
-[Elixir 1.5](http://elixir-lang.github.io/install.html)
++ [**`Elixir` v1.5**](https://github.com/dwyl/learn-elixir#installation) (or higher)
++ Github API Token
++ **5 Minutes** 
 
-Github API Token:
-You'll need a personal access token
-from someone with admin rights
+#### Github API Token
+
+You will need a personal access token with admin rights
 to all of the repos you want to protect.
 To generate a token,
 follow this guide from Github Help:
@@ -65,13 +69,14 @@ Your token only requires **repo** access:
 src="https://user-images.githubusercontent.com/8939909/32742752-3a9f68d2-c8a2-11e7-9251-e022095f6ee0.png">  
 
 Don't give it more permissions than it needs.
-See: https://en.wikipedia.org/wiki/Principle_of_least_privilege
+See: 
+https://en.wikipedia.org/wiki/Principle_of_least_privilege
 
 Once you've generated your access token,
 make it available as an environment variable by running:
 
 ```
-export GITHUB_ACCESS_TOKEN=<your-personal-access-token>
+x<your-personal-access-token>
 ```
 
 > Note: we place this export statement
@@ -84,13 +89,13 @@ file to avoid losing the variable when the terminal session ends.
 
 ### Usage
 
-You'll first need to clone this repo:  
+Clone this repo:  
 
 ```sh
-git clone git@github.com:dwyl/protect-master-branch.git
+git clone git@github.com:dwyl/protect-main-branch.git
 ```
 
-Then `cd protect-master-branch`
+Then `cd protect-main-branch`
 
 Then run:  
 ```sh
@@ -100,7 +105,7 @@ mix escript.build
 This will create a file called `protect`.
 
 Use the script as follows:  
-```
+```sh
 ./protect --org <name> --rules <path/to/file.json>
 OR
 ./protect --user <name> --rules <path/to/file.json>
