@@ -3,8 +3,8 @@ defmodule Protect.Github do
     Helper functions to interact with the Github API.
     uses HTTPoison.request!/4 to make HTTP requests.
   """
-  @httpoison Application.get_env :protect, :httpoison
-  @auth_token System.get_env "GITHUB_ACCESS_TOKEN"
+  @httpoison Application.compile_env :protect, :httpoison
+  @auth_token Envar.get "GITHUB_ACCESS_TOKEN"
   @root_url "https://api.github.com"
 
   def get!(url), do: request! "get", url

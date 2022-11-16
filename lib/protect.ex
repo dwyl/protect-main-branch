@@ -4,8 +4,10 @@ defmodule Protect do
     and a json file of protection rules, and applies those rules to the
     main branch of all the organization's repos
   """
+  require Logger
   require Poison
   alias Protect.Github
+
 
   @doc """
     The function that is called when the command line script is run.
@@ -119,7 +121,7 @@ defmodule Protect do
     Enum.each(fail, &(IO.puts "Error #{&1.status_code}: #{&1.repo_name}"))
 
     IO.puts """
-      #{success_count} branches succesfully protected
+      #{success_count} branches successfully protected
       #{fail_count} branches errored
     """
   end
