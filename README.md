@@ -2,8 +2,8 @@
 
 # Protect Master Branch
 
-[![Build Status](https://img.shields.io/travis/dwyl/protect-master-branch/master.svg?style=flat-square)](https://travis-ci.org/dwyl/protect-master-branch)
-[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/protect-master-branch/master.svg?style=flat-square)](http://codecov.io/github/dwyl/protect-master-branch?branch=master)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dwyl/protect-main-branch/Elixir%20CI?label=build&style=flat-square)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/protect-main-branch/main.svg?style=flat-square)](http://codecov.io/github/dwyl/protect-main-branch?branch=main)
 [![HitCount](http://hits.dwyl.com/dwyl/protect-master-branch.svg)](http://hits.dwyl.com/dwyl/protect-master-branch)
 
 </div>
@@ -76,7 +76,7 @@ Once you've generated your access token,
 make it available as an environment variable by running:
 
 ```
-x<your-personal-access-token>
+export GITHUB_ACCESS_TOKEN=<your-personal-access-token>
 ```
 
 > Note: we place this export statement
