@@ -6,7 +6,7 @@ defmodule Protect.Mixfile do
       app: :protect,
       version: "0.1.0",
       elixir: "~> 1.14",
-      start_permanent: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps(),
       escript: [main_module: Protect],
@@ -40,15 +40,14 @@ defmodule Protect.Mixfile do
       {:envar, "~> 1.0.9"},
 
       # Code format: github.com/rrrene/credo
-        {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-
+      {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:pre_commit, "~> 0.3.4", only: :dev},
       # Check test coverage: github.com/parroty/excoveralls
-      {:excoveralls, "~> 0.14.3", only: :test},
+      {:excoveralls, "~> 0.14.3", only: :test}
     ]
   end
 
-    defp aliases do
+  defp aliases do
     [
       c: ["coveralls.html"],
       t: ["test"]

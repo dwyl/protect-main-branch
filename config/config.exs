@@ -3,4 +3,4 @@ import Mix.Config
 config :protect,
   httpoison: HTTPoison
 
-import_config "#{Mix.env}.exs"
+import_config "#{Mix.env()}.exs"
