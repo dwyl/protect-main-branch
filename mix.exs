@@ -5,7 +5,7 @@ defmodule Protect.Mixfile do
     [
       app: :protect,
       version: "0.1.0",
-      elixir: "~> 1.5",
+      elixir: "~> 1.14",
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
       deps: deps(),
@@ -15,8 +15,9 @@ defmodule Protect.Mixfile do
         c: :test,
         coveralls: :test,
         "coveralls.detail": :test,
-        "coveralls.post": :test,
         "coveralls.html": :test,
+        "coveralls.json": :test,
+        "coveralls.post": :test,
         t: :test
       ]
     ]
@@ -34,9 +35,12 @@ defmodule Protect.Mixfile do
     [
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.6.2"},
+
+      # Code format: github.com/rrrene/credo
       {:credo, "~> 1.3.2", only: [:dev, :test], runtime: false},
+
       {:pre_commit, "~> 0.3.4", only: :dev},
-      # Check test coverage
+      # Check test coverage:
       {:excoveralls, "~> 0.14.3", only: :test},
     ]
   end
