@@ -10,7 +10,7 @@ defmodule Protect.Mock.HTTPoison do
   def request!("put", _url, _body, _headers) do
     %{status_code: 200}
   end
-  def request!("patch", _url, _body, _headers) do
+  def request!("post", _url, _body, _headers) do
     %{status_code: 200}
   end
 end

@@ -113,14 +113,13 @@ defmodule Protect do
   @doc """
     `rename_master_to_main/2` renames the given repo's default branch from master to main.
     should fail silently.
-
-    Ref: https://openssl.medium.com/renaming-the-default-branch-from-master-to-main-on-github-2f965cdbbc19
     API Doc: https://docs.github.com/en/rest/branches/branches#rename-a-branch
+    Ref: https://openssl.medium.com/renaming-the-default-branch-from-master-to-main-on-github-2f965cdbbc19
   """
   def rename_master_to_main(options, repo) do
-    "/repos/#{owner(options)}/#{repo}" # /branches/master/rename
+    "/repos/#{owner(options)}/#{repo}/branches/master/rename"
+    |> Github.post!(Poison.encode!(%{new_name: "main"}))
     |> dbg()
-    |> Github.patch!(Poison.encode!(%{default_branch: "main"}))
   end
 
   @doc """
@@ -130,8 +129,8 @@ defmodule Protect do
     owner = options[:org] || options[:user]
 
     "/repos/#{owner}/#{repo}/branches/main/protection"
-    |> dbg()
     |> Github.put!(rules)
+    |> dbg()
   end
 
   @doc """
