@@ -37,7 +37,7 @@ defmodule Protect.Mixfile do
       {:httpoison, "~> 1.6.2"},
 
       # Code format: github.com/rrrene/credo
-      {:credo, "~> 1.3.2", only: [:dev, :test], runtime: false},
+        {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
 
       {:pre_commit, "~> 0.3.4", only: :dev},
       # Check test coverage: github.com/parroty/excoveralls
