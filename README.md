@@ -42,8 +42,8 @@ and potentially catastrophic.
 
 ## _Who?_
 
-This is relevant to organisations/people
-that have a _lot_ of GitHub repositories
+This is relevant to people/orgs
+that have a few GitHub repositories
 and want to protect them from accidental
 (_or malicious_) destruction.
 
@@ -70,7 +70,7 @@ src="https://user-images.githubusercontent.com/8939909/32742752-3a9f68d2-c8a2-11
 
 Don't give it more permissions than it needs.
 See: 
-https://en.wikipedia.org/wiki/Principle_of_least_privilege
+[wikipedia.org/wiki/**Principle_of_least_privilege**](https://en.wikipedia.org/wiki/Principle_of_least_privilege)
 
 Once you've generated your access token,
 make it available as an environment variable by running:
@@ -111,7 +111,7 @@ OR
 ./protect --user <name> --rules <path/to/file.json>
 
 Options:
-  --org: Name of the organisation that owns the repos you want to protect.
+  --org: Name of the organization that owns the repos you want to protect.
   --user: Name of the user who owns the repos you want to protect.
   --rules: A path to a json file where you have defined the rules you want to
            apply to the master branch of all your repos.
@@ -137,7 +137,7 @@ You should expect to see output similar to the following:
 "/repos/dwyl/flutter-counter-example/branches/master/protection"
 Error 404: why
 Error 404: learn-WebAssembly
-  318 branches succesfully protected
+  318 branches successfully protected
   2 branches errored
 ```
 
@@ -145,4 +145,9 @@ Repos will appear in the output in age order.
 (_oldest repos first_)
 
 
- See [Github API docs](https://developer.github.com/v3/repos/branches/#update-branch-protection) for full details of the protection rules available, and [our rules file](https://github.com/dwyl/protect-master-branch/blob/master/rules.json) for an example.
+See 
+[Github API docs](https://developer.github.com/v3/repos/branches/#update-branch-protection) 
+for full details of the protection rules available, and 
+our rules file
+[**`rules.json`**](https://github.com/dwyl/protect-master-branch/blob/main/rules.json) 
+for an example.

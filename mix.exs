@@ -36,6 +36,9 @@ defmodule Protect.Mixfile do
       {:poison, "~> 4.0.1"},
       {:httpoison, "~> 1.6.2"},
 
+      # Environment Variables: github.com/dwyl/envar
+      {:envar, "~> 1.0.9"},
+
       # Code format: github.com/rrrene/credo
         {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
 

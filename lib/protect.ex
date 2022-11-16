@@ -21,6 +21,8 @@ defmodule Protect do
     options
     |> get_repos
     |> Enum.map(fn repo ->
+      rename_master_to_main(options, repo)
+
       options
       |> protect_repo(repo, rules)
       |> Map.put(:repo_name, repo)
@@ -86,6 +88,15 @@ defmodule Protect do
     end
   end
 
+  defp owner(options) do
+    cond do
+      options[:org] ->
+        options[:org]
+      options[:user] ->
+        options[:user]
+    end
+  end
+
   @doc """
     Determines the correct url to use in the get_repos function, depending on
     whether the repo owner is a user or an organization.
@@ -93,10 +104,23 @@ defmodule Protect do
   def get_repos_url(options, page \\ 1) do
       cond do
         options[:org] ->
-          "/orgs/#{options[:org]}/repos?per_page=100&page=#{page}"
+          "/orgs/#{owner(options)}/repos?per_page=100&page=#{page}"
         options[:user] ->
-          "/users/#{options[:user]}/repos?per_page=100&page=#{page}"
+          "/users/#{owner(options)}/repos?per_page=100&page=#{page}"
       end
+  end
+
+  @doc """
+    `rename_master_to_main/2` renames the given repo's default branch from master to main.
+    should fail silently.
+
+    Ref: https://openssl.medium.com/renaming-the-default-branch-from-master-to-main-on-github-2f965cdbbc19
+    API Doc: https://docs.github.com/en/rest/branches/branches#rename-a-branch
+  """
+  def rename_master_to_main(options, repo) do
+    "/repos/#{owner(options)}/#{repo}" # /branches/master/rename
+    |> dbg()
+    |> Github.patch!(Poison.encode!(%{default_branch: "main"}))
   end
 
   @doc """
@@ -106,7 +130,7 @@ defmodule Protect do
     owner = options[:org] || options[:user]
 
     "/repos/#{owner}/#{repo}/branches/main/protection"
-    |> IO.inspect()
+    |> dbg()
     |> Github.put!(rules)
   end
 

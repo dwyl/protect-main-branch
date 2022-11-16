@@ -8,6 +8,7 @@ defmodule Protect.Github do
   @root_url "https://api.github.com"
 
   def get!(url), do: request! "get", url
+  def patch!(url, body), do: request! "patch", url, body
   def put!(url, body), do: request! "put", url, body
 
   defp request!(method, url, body \\ "") do

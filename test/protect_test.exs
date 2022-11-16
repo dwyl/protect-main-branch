@@ -67,7 +67,7 @@ defmodule ProtectTest do
         @status_codes,
         fn {status, success, fail} ->
           assert capture_io(fn -> Protect.report(status) end) =~ """
-            #{success} branches succesfully protected
+            #{success} branches successfully protected
             #{fail} branches errored
           """
         end
@@ -113,7 +113,7 @@ defmodule ProtectTest do
           ["--user", "danwhy", "--rules", "./test/fixtures/test.json"]
           |> Protect.main
         end) =~ """
-          1 branches succesfully protected
+          1 branches successfully protected
           0 branches errored
         """
     end
