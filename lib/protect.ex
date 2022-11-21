@@ -90,15 +90,7 @@ defmodule Protect do
     end
   end
 
-  defp owner(options) do
-    cond do
-      options[:org] ->
-        options[:org]
-
-      options[:user] ->
-        options[:user]
-    end
-  end
+  defp owner(options), do: options[:org] || options[:user]
 
   @doc """
     Determines the correct url to use in the get_repos function, depending on
