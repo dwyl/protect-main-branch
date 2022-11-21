@@ -22,29 +22,29 @@ defmodule ProtectTest do
     test "invalid options" do
       Enum.each(
         @invalid_options,
-        &(assert_raise(RuntimeError, fn -> Protect.validate_options(&1) end))
+        &assert_raise(RuntimeError, fn -> Protect.validate_options(&1) end)
       )
     end
 
     test "valid options" do
-      Enum.each(@valid_options, &(assert(Protect.validate_options(&1) == &1)))
+      Enum.each(@valid_options, &assert(Protect.validate_options(&1) == &1))
     end
   end
 
   describe "get_repos_url" do
     test "get user repos" do
-      assert Protect.get_repos_url([user: "danwhy"]) ==
-        "/users/danwhy/repos?per_page=100&page=1"
+      assert Protect.get_repos_url(user: "danwhy") ==
+               "/users/danwhy/repos?per_page=100&page=1"
     end
 
     test "get org repos" do
-      assert Protect.get_repos_url([org: "dwyl"]) ==
-        "/orgs/dwyl/repos?per_page=100&page=1"
+      assert Protect.get_repos_url(org: "dwyl") ==
+               "/orgs/dwyl/repos?per_page=100&page=1"
     end
 
     test "get second page" do
       assert Protect.get_repos_url([org: "dwyl"], 2) ==
-        "/orgs/dwyl/repos?per_page=100&page=2"
+               "/orgs/dwyl/repos?per_page=100&page=2"
     end
   end
 
@@ -67,9 +67,9 @@ defmodule ProtectTest do
         @status_codes,
         fn {status, success, fail} ->
           assert capture_io(fn -> Protect.report(status) end) =~ """
-            #{success} branches succesfully protected
-            #{fail} branches errored
-          """
+                   #{success} branches successfully protected
+                   #{fail} branches errored
+                 """
         end
       )
     end
@@ -77,51 +77,50 @@ defmodule ProtectTest do
 
   describe "get_repos/3" do
     test "get repos user" do
-      assert Protect.get_repos([user: "danwhy"]) == ["test"]
+      assert Protect.get_repos(user: "danwhy") == ["test"]
     end
 
     test "get repos org" do
       url = "https://api.github.com/orgs/dwyl/repos?per_page=100&page=1"
       json = Mock.request!("get", url, "_body", "_headers")
-      repos = json
-      |> Map.get(:body, "{}")
-      |> Poison.decode!
-      |> Enum.map(&Map.fetch!(&1, "name"))
 
-      assert Protect.get_repos([org: "dwyl"]) == repos ++ ["test"]
+      repos =
+        json
+        |> Map.get(:body, "{}")
+        |> Poison.decode!()
+        |> Enum.map(&Map.fetch!(&1, "name"))
+
+      assert Protect.get_repos(org: "dwyl") == repos ++ ["test"]
     end
   end
 
   describe "protect_repo/3" do
     test "protect repo" do
       assert Protect.protect_repo(
-        [user: "danwhy"],
-        "/repos/danwhy/test/branches/master/protection",
-        %{test: "body"}
-      ) == %{status_code: 200}
+               [user: "danwhy"],
+               "/repos/danwhy/test/branches/main/protection",
+               %{test: "body"}
+             ) == %{status_code: 200}
     end
   end
 
   describe "main/1" do
     test "main success" do
-      assert Protect.main(
-        ["--user", "danwhy", "--rules", "./test/fixtures/test.json"]
-      ) == :ok
+      assert Protect.main(["--user", "danwhy", "--rules", "./test/fixtures/test.json"]) == :ok
 
-      assert capture_io(
-        fn ->
-          ["--user", "danwhy", "--rules", "./test/fixtures/test.json"]
-          |> Protect.main
-        end) =~ """
-          1 branches succesfully protected
-          0 branches errored
-        """
+      assert capture_io(fn ->
+               ["--user", "danwhy", "--rules", "./test/fixtures/test.json"]
+               |> Protect.main()
+             end) =~ """
+               1 branches successfully protected
+               0 branches errored
+             """
     end
 
     test "main bad arguments" do
       Enum.each(
         @invalid_options,
-        &(assert_raise(RuntimeError, fn -> Protect.main(&1) end))
+        &assert_raise(RuntimeError, fn -> Protect.main(&1) end)
       )
     end
   end
