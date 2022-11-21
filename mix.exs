@@ -33,7 +33,7 @@ defmodule Protect.Mixfile do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:poison, "~> 4.0.1"},
+      {:poison, "~> 5.0.0"},
       {:httpoison, "~> 1.6.2"},
 
       # Environment Variables: github.com/dwyl/envar
