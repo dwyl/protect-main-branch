@@ -3,8 +3,8 @@
 # Protect Master Branch
 
 ![GitHub Workflow Status](https://img.shields.io/github/workflow/status/dwyl/protect-main-branch/Elixir%20CI?label=build&style=flat-square)
-[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/protect-main-branch/main.svg?style=flat-square)](http://codecov.io/github/dwyl/protect-main-branch?branch=main)
-[![HitCount](http://hits.dwyl.com/dwyl/protect-master-branch.svg)](http://hits.dwyl.com/dwyl/protect-master-branch)
+[![codecov.io](https://img.shields.io/codecov/c/github/dwyl/protect-main-branch/main.svg?style=flat-square)](https://codecov.io/github/dwyl/protect-main-branch?branch=main)
+[![HitCount](https://hits.dwyl.com/dwyl/protect-master-branch.svg)](https://hits.dwyl.com/dwyl/protect-master-branch)
 
 </div>
 
