@@ -43,7 +43,7 @@ defmodule Protect.Mixfile do
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
       {:pre_commit, "~> 0.3.4", only: :dev},
       # Check test coverage: github.com/parroty/excoveralls
-      {:excoveralls, "~> 0.14.3", only: :test}
+      {:excoveralls, "~> 0.18.0", only: :test}
     ]
   end
 
